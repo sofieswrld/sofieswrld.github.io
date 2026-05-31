@@ -1,0 +1,13 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  params?: string;
+}
+
+const { id, title, params = "rel=0" } = Astro.props;
+---
+
+<figure class="youtube-embed">
+  <lite-youtube videoid={id} title={title} playlabel={`Play: ${title}`} params={params}></lite-youtube>
+</figure>

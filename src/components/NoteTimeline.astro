@@ -1,6 +1,7 @@
 ---
 import { render, type CollectionEntry } from "astro:content";
 import { formatDate } from "../lib/content";
+import YouTube from "./YouTube.astro";
 
 interface Props {
   notes: CollectionEntry<"notes">[];
@@ -38,6 +39,13 @@ const getHiddenImageCount = (note: CollectionEntry<"notes">) =>
         <div class="prose">
           <Content />
         </div>
+        {note.data.videos.length > 0 && (
+          <div class="note-videos" aria-label={`${note.data.title} 영상`}>
+            {note.data.videos.map((video) => (
+              <YouTube id={video.id} title={video.title} />
+            ))}
+          </div>
+        )}
         {note.data.images.length > 0 && (
           <div
             class:list={[
@@ -53,7 +61,7 @@ const getHiddenImageCount = (note: CollectionEntry<"notes">) =>
                   href={image.src}
                   data-pswp-width={image.width ?? 1200}
                   data-pswp-height={image.height ?? 800}
-                  data-pswp-caption={image.caption ?? image.alt}
+                  data-pswp-caption={image.alt}
                   aria-label={`${note.data.title} 이미지 크게 보기`}
                 >
                   <img
@@ -69,7 +77,6 @@ const getHiddenImageCount = (note: CollectionEntry<"notes">) =>
                     </span>
                   )}
                 </a>
-                {image.caption && <figcaption>{image.caption}</figcaption>}
               </figure>
             ))}
             {getHiddenImages(note).map((image) => (
@@ -78,7 +85,7 @@ const getHiddenImageCount = (note: CollectionEntry<"notes">) =>
                 href={image.src}
                 data-pswp-width={image.width ?? 1200}
                 data-pswp-height={image.height ?? 800}
-                data-pswp-caption={image.caption ?? image.alt}
+                data-pswp-caption={image.alt}
                 aria-hidden="true"
                 tabindex="-1"
               >

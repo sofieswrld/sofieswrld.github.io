@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "lite-youtube-embed/src/lite-yt-embed.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import { SITE } from "../lib/site";
 
@@ -46,5 +47,8 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
         <span>© {new Date().getFullYear()} {SITE.name}</span>
       </footer>
     </div>
+    <script>
+      import "lite-youtube-embed/src/lite-yt-embed.js";
+    </script>
   </body>
 </html>

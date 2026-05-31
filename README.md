@@ -8,7 +8,7 @@ Astro 기반의 개인 블로그입니다.
 - `/posts`: 글
 - `/notes`: 조각글
 
-콘텐츠는 `src/content/posts`와 `src/content/notes`에 MD/MDX 파일로 추가합니다.
+콘텐츠는 `src/content/posts`와 `src/content/notes`에 Markdown 파일로 추가합니다.
 `draft: true`인 글과 조각글은 목록과 빌드 결과에서 제외됩니다.
 
 조각글은 Threads/Twitter 스타일의 이미지 그리드를 지원합니다.

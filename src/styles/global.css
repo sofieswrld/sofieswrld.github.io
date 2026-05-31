@@ -457,10 +457,16 @@ p {
 
 .note {
   position: relative;
-  padding: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 2rem;
   background: transparent;
   color: var(--ink);
   scroll-margin-top: 2rem;
+}
+
+.note:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
 .note-heading {
@@ -522,6 +528,27 @@ p {
   background: var(--soft);
 }
 
+.note-videos {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.youtube-embed {
+  margin: 1.5rem 0 0;
+}
+
+.note-videos .youtube-embed {
+  margin: 0;
+}
+
+.youtube-embed lite-youtube {
+  max-inline-size: 100%;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
 .note-media-grid--1 {
   display: block;
 }
@@ -563,18 +590,6 @@ p {
   block-size: 100%;
   min-block-size: inherit;
   object-fit: cover;
-}
-
-.note-media figcaption {
-  position: absolute;
-  right: 0.5rem;
-  bottom: 0.5rem;
-  max-width: calc(100% - 1rem);
-  border-radius: 999px;
-  padding: 0.24rem 0.55rem;
-  background: rgba(17, 17, 17, 0.72);
-  color: #ffffff;
-  font-size: 0.72rem;
 }
 
 .note-media-more {

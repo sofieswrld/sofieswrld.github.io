@@ -20,9 +20,17 @@ const noteSchema = z.object({
       z.object({
         src: z.string(),
         alt: z.string(),
-        caption: z.string().optional(),
         width: z.number().positive().optional(),
         height: z.number().positive().optional(),
+      }),
+    )
+    .default([]),
+  videos: z
+    .array(
+      z.object({
+        provider: z.literal("youtube"),
+        id: z.string(),
+        title: z.string(),
       }),
     )
     .default([]),
@@ -32,11 +40,11 @@ const noteSchema = z.object({
 
 export const collections = {
   posts: defineCollection({
-    loader: glob({ base: "./src/content/posts", pattern: "**/*.{md,mdx}" }),
+    loader: glob({ base: "./src/content/posts", pattern: "**/*.md" }),
     schema: postSchema,
   }),
   notes: defineCollection({
-    loader: glob({ base: "./src/content/notes", pattern: "**/*.{md,mdx}" }),
+    loader: glob({ base: "./src/content/notes", pattern: "**/*.md" }),
     schema: noteSchema,
   }),
 };
