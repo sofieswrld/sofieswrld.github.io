@@ -1,0 +1,23 @@
+---
+import { render } from "astro:content";
+import PostNavigation from "../../components/PostNavigation.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, getPostStaticPaths } from "../../lib/content";
+
+export const getStaticPaths = getPostStaticPaths;
+
+const { post, olderPost, newerPost } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} | Sofie’s Wrld`} description={post.data.description}>
+  <article class="prose post-prose">
+    <h1 class="post-title">{post.data.title}</h1>
+    <p class="meta">
+      {formatDate(post.data.pubDate)}
+      {post.data.updatedDate && ` · updated ${formatDate(post.data.updatedDate)}`}
+    </p>
+    <Content />
+  </article>
+  <PostNavigation olderPost={olderPost} newerPost={newerPost} />
+</BaseLayout>

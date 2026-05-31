@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<BaseLayout>
+  <div class="hero">
+    <PageHeader
+      title="소피의세계"
+      description="좋아하는 것, 오래 붙잡고 싶은 생각, 그리고 아직 이름 붙이기 전의 조각들을 천천히 모아두는 작은 인터넷 공간입니다. 긴 호흡의 생각은 글로 남기고, 지나가다 붙잡은 문장과 장면은 조각글로 기록합니다."
+    />
+    <div class="card" aria-label="사이트 소개">
+      <p>
+        긴 호흡은 <a href="/posts">글</a>에, 지나가다 붙잡은 문장은
+        <a href="/notes">조각글</a>에 남깁니다.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

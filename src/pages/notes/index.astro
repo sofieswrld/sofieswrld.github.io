@@ -1,0 +1,19 @@
+---
+import NoteTimeline from "../../components/NoteTimeline.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import PhotoSwipeInit from "../../components/PhotoSwipeInit.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPublishedNotes } from "../../lib/content";
+
+const notes = await getPublishedNotes();
+---
+
+<BaseLayout title="조각글 | Sofie’s Wrld" description="Sofie’s Wrld의 짧은 조각글 타임라인.">
+  <PageHeader
+    title="조각글"
+    description="완성된 결론보다, 그때그때 선명했던 감각과 문장을 시간순으로 남깁니다."
+  />
+
+  <NoteTimeline notes={notes} />
+  <PhotoSwipeInit />
+</BaseLayout>

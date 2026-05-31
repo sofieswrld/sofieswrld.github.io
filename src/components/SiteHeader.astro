@@ -1,0 +1,21 @@
+---
+import { isNavItemActive, NAV_ITEMS } from "../lib/site";
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <nav class="tabs" aria-label="주요 탐색">
+    {
+      NAV_ITEMS.map((item) => (
+        <a
+          class="tab"
+          href={item.href}
+          aria-current={isNavItemActive(item, pathname) ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

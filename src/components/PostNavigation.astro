@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  olderPost?: CollectionEntry<"posts">;
+  newerPost?: CollectionEntry<"posts">;
+}
+
+const { olderPost, newerPost } = Astro.props;
+---
+
+{
+  (olderPost || newerPost) && (
+    <nav class="post-navigation" aria-label="글 이동">
+      {olderPost ? (
+        <a class="post-nav-link" href={`/posts/${olderPost.id}`}>
+          <span>이전 글</span>
+          <strong>{olderPost.data.title}</strong>
+        </a>
+      ) : (
+        <span></span>
+      )}
+      {newerPost ? (
+        <a class="post-nav-link post-nav-link--next" href={`/posts/${newerPost.id}`}>
+          <span>다음 글</span>
+          <strong>{newerPost.data.title}</strong>
+        </a>
+      ) : (
+        <span></span>
+      )}
+    </nav>
+  )
+}

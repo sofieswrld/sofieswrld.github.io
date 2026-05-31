@@ -1,0 +1,20 @@
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
+
+  const initPhotoSwipe = () => {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: ".note-media-grid",
+      children: "a",
+      pswpModule: () => import("photoswipe"),
+    });
+
+    lightbox.init();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initPhotoSwipe, { once: true });
+  } else {
+    initPhotoSwipe();
+  }
+</script>

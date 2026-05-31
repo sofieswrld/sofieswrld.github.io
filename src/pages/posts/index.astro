@@ -1,0 +1,16 @@
+---
+import PageHeader from "../../components/PageHeader.astro";
+import PostList from "../../components/PostList.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPublishedPosts } from "../../lib/content";
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout title="글 | Sofie’s Wrld" description="Sofie’s Wrld의 긴 호흡 글 목록.">
+  <PageHeader title="글" description="조금 더 오래 생각한 것들을 글의 형태로 남깁니다." />
+
+  <section class="section" aria-label="글 목록">
+    <PostList posts={posts} />
+  </section>
+</BaseLayout>

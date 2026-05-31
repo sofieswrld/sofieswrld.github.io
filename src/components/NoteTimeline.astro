@@ -1,0 +1,93 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import { formatDate } from "../lib/content";
+
+interface Props {
+  notes: CollectionEntry<"notes">[];
+}
+
+const { notes } = Astro.props;
+const renderedNotes = await Promise.all(
+  notes.map(async (note) => ({
+    note,
+    Content: (await render(note)).Content,
+  })),
+);
+
+const getVisibleImages = (note: CollectionEntry<"notes">) =>
+  note.data.images.slice(0, 4);
+
+const getHiddenImages = (note: CollectionEntry<"notes">) =>
+  note.data.images.slice(4);
+
+const getHiddenImageCount = (note: CollectionEntry<"notes">) =>
+  Math.max(note.data.images.length - 4, 0);
+---
+
+<ol class="timeline" aria-label="조각글 타임라인">
+  {
+    renderedNotes.map(({ note, Content }) => (
+      <li class="note" id={note.id}>
+        <div class="note-heading">
+          <h3>{note.data.title}</h3>
+          <a class="anchor" href={`#${note.id}`} aria-label={`${note.data.title}로 이동`}>
+            #
+          </a>
+        </div>
+        <span class="meta">{formatDate(note.data.pubDate)}</span>
+        <div class="prose">
+          <Content />
+        </div>
+        {note.data.images.length > 0 && (
+          <div
+            class:list={[
+              "note-media-grid",
+              `note-media-grid--${Math.min(note.data.images.length, 4)}`,
+            ]}
+            aria-label={`${note.data.title} 이미지`}
+          >
+            {getVisibleImages(note).map((image, index) => (
+              <figure class="note-media">
+                <a
+                  class="note-media-link"
+                  href={image.src}
+                  data-pswp-width={image.width ?? 1200}
+                  data-pswp-height={image.height ?? 800}
+                  data-pswp-caption={image.caption ?? image.alt}
+                  aria-label={`${note.data.title} 이미지 크게 보기`}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                  />
+                  {index === 3 && getHiddenImageCount(note) > 0 && (
+                    <span class="note-media-more" aria-label={`이미지 ${getHiddenImageCount(note)}장 더 있음`}>
+                      +{getHiddenImageCount(note)}
+                    </span>
+                  )}
+                </a>
+                {image.caption && <figcaption>{image.caption}</figcaption>}
+              </figure>
+            ))}
+            {getHiddenImages(note).map((image) => (
+              <a
+                class="note-media-hidden"
+                href={image.src}
+                data-pswp-width={image.width ?? 1200}
+                data-pswp-height={image.height ?? 800}
+                data-pswp-caption={image.caption ?? image.alt}
+                aria-hidden="true"
+                tabindex="-1"
+              >
+                {image.alt}
+              </a>
+            ))}
+          </div>
+        )}
+      </li>
+    ))
+  }
+</ol>
