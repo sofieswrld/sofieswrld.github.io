@@ -1,6 +1,6 @@
 ---
 title: "처음의 자리"
-description: "Sofie’s Wrld를 어떤 공간으로 만들고 싶은지 적어둔 첫 글."
+description: "소피의세계를 어떤 공간으로 만들고 싶은지 적어둔 첫 글."
 pubDate: 2026-05-31
 tags: ["intro", "blog"]
 draft: false

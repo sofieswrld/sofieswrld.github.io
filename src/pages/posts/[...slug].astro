@@ -3,6 +3,7 @@ import { render } from "astro:content";
 import PostNavigation from "../../components/PostNavigation.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { formatDate, getPostStaticPaths } from "../../lib/content";
+import { SITE } from "../../lib/site";
 
 export const getStaticPaths = getPostStaticPaths;
 
@@ -10,7 +11,7 @@ const { post, olderPost, newerPost } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={`${post.data.title} | Sofie’s Wrld`} description={post.data.description}>
+<BaseLayout title={`${post.data.title} | ${SITE.title}`} description={post.data.description}>
   <article class="prose post-prose">
     <h1 class="post-title">{post.data.title}</h1>
     <p class="meta">

@@ -1,6 +1,6 @@
 export const SITE = {
-  name: "Sofie’s Wrld",
-  title: "Sofie’s Wrld",
+  name: "소피의세계",
+  title: "소피의세계",
   description: "소피의 세계, 글, 조각글을 모아두는 작은 개인 공간.",
   url: "https://sofieswrld.blog",
   locale: "ko_KR",
