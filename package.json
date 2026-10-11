@@ -16,6 +16,8 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
+    "@fontsource/pretendard": "^5.2.5",
+    "@lucide/astro": "^1.17.0",
     "astro": "^6.4.2",
     "lite-youtube-embed": "^0.3.4",
     "photoswipe": "^5.4.4",

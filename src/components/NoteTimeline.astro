@@ -1,5 +1,6 @@
 ---
 import { render, type CollectionEntry } from "astro:content";
+import { Link2 } from "@lucide/astro";
 import { formatDate } from "../lib/content";
 import YouTube from "./YouTube.astro";
 
@@ -25,14 +26,20 @@ const getHiddenImageCount = (note: CollectionEntry<"notes">) =>
   Math.max(note.data.images.length - 4, 0);
 ---
 
-<ol class="timeline" aria-label="조각글 타임라인">
+<ol class="timeline" data-note-timeline aria-label="조각글 타임라인">
   {
     renderedNotes.map(({ note, Content }) => (
-      <li class="note" id={note.id}>
+      <li class="note" id={note.id} data-note-id={note.id}>
         <div class="note-heading">
           <h3>{note.data.title}</h3>
-          <a class="anchor" href={`#${note.id}`} aria-label={`${note.data.title}로 이동`}>
-            #
+          <a
+            class="anchor"
+            href={`#${note.id}`}
+            data-note-anchor
+            aria-label={`${note.data.title} 링크 복사`}
+          >
+            <Link2 size={15} stroke-width={2.2} absoluteStrokeWidth />
+            <span class="sr-only">링크 복사</span>
           </a>
         </div>
         <span class="meta">{formatDate(note.data.pubDate)}</span>
@@ -98,3 +105,8 @@ const getHiddenImageCount = (note: CollectionEntry<"notes">) =>
     ))
   }
 </ol>
+<p class="copy-toast" data-copy-toast role="status" aria-live="polite">Copied!</p>
+
+<script>
+  import "../scripts/note-timeline";
+</script>

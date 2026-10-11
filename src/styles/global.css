@@ -8,7 +8,7 @@
   --line: #e4e4e7;
   --soft: #f4f4f5;
   --soft-hover: #e4e4e7;
-  --font-body: "Uncut Sans", "Avenir Next", "Helvetica Neue", sans-serif;
+  --font-body: "Pretendard", "Avenir Next", "Helvetica Neue", sans-serif;
   --fs-body: clamp(1rem, 0.94rem + 0.22vw, 1.08rem);
   --fs-small: 0.9rem;
   --fs-h1: clamp(3rem, 11vw, 4.15rem);
@@ -30,6 +30,15 @@ html {
   color: var(--ink);
   font-family: var(--font-body);
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 body {
@@ -38,6 +47,20 @@ body {
   font-weight: 500;
   letter-spacing: -0.012em;
   font-size: var(--fs-body);
+}
+
+.scroll-progress {
+  position: fixed;
+  inset-block: 0 auto;
+  inset-inline: 0 auto;
+  z-index: 30;
+  inline-size: 100%;
+  block-size: 2px;
+  background: var(--ink);
+  opacity: 0.72;
+  pointer-events: none;
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left center;
 }
 
 a {
@@ -462,11 +485,30 @@ p {
   background: transparent;
   color: var(--ink);
   scroll-margin-top: 2rem;
+  transition:
+    opacity 180ms ease,
+    filter 180ms ease;
 }
 
 .note:first-child {
   border-top: 0;
   padding-top: 0;
+}
+
+.timeline[data-has-focus] .note[data-dimmed] {
+  opacity: 0.48;
+  filter: grayscale(0.7);
+}
+
+.timeline[data-has-focus] .note[data-dimmed]:hover,
+.timeline[data-has-focus] .note[data-dimmed]:focus-within {
+  opacity: 0.78;
+  filter: grayscale(0.2);
+}
+
+.timeline[data-has-focus] .note[data-focused] {
+  opacity: 1;
+  filter: none;
 }
 
 .note-heading {
@@ -505,17 +547,55 @@ p {
 }
 
 .anchor {
+  display: inline-grid;
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+  place-items: center;
   color: var(--faint);
-  font-size: 0.9rem;
-  opacity: 0;
+  opacity: 0.35;
   text-decoration: none;
+  transition:
+    color 120ms ease,
+    opacity 120ms ease;
+}
+
+.anchor svg {
+  inline-size: 0.9rem;
+  block-size: 0.9rem;
 }
 
 .note:focus-within .anchor,
 .note:hover .anchor,
+.note[data-focused] .anchor,
 .anchor:hover {
   color: var(--muted);
   opacity: 1;
+}
+
+.copy-toast {
+  position: fixed;
+  inset-inline: 50% auto;
+  inset-block-end: 1.25rem;
+  z-index: 20;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0.5rem);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.copy-toast[data-visible] {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .note-media-grid {
