@@ -7,7 +7,7 @@ import rehypeYouTubeEmbeds from "./src/lib/rehype-youtube-embeds";
 import remarkYouTubeEmbeds from "./src/lib/remark-youtube-embeds";
 
 export default defineConfig({
-  site: "https://sofieswrld.blog",
+  site: "https://sofieswrld.github.io",
   integrations: [sitemap()],
   markdown: {
     processor: unified({

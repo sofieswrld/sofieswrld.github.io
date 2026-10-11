@@ -2,7 +2,7 @@ export const SITE = {
   name: "소피의세계",
   title: "소피의세계",
   description: "소피의 세계, 글, 조각글을 모아두는 작은 개인 공간.",
-  url: "https://sofieswrld.blog",
+  url: "https://sofieswrld.github.io",
   locale: "ko_KR",
 } as const;
 
